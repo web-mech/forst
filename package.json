@@ -1,0 +1,33 @@
+{
+  "name": "forst",
+  "version": "0.1.0",
+  "description": "Radix Trie-Based Configuration Platform",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava src/**/**.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-mech/forst.git"
+  },
+  "keywords": [
+    "trie",
+    "radix",
+    "configuration",
+    "tree"
+  ],
+  "author": "Michael Price <webmech@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/web-mech/forst/issues"
+  },
+  "homepage": "https://github.com/web-mech/forst#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
