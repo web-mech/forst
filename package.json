@@ -4,7 +4,7 @@
   "description": "Radix Trie-Based Configuration Platform",
   "main": "src/index.js",
   "scripts": {
-    "test": "ava src/**/**.spec.js"
+    "test": "ava tests/**/**.spec.js"
   },
   "repository": {
     "type": "git",
@@ -23,11 +23,16 @@
   },
   "homepage": "https://github.com/web-mech/forst#readme",
   "devDependencies": {
+    "ava": "^0.20.0",
     "cz-conventional-changelog": "^2.0.0"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "ini": "^1.3.5",
+    "n-deep-merge": "0.0.2"
   }
 }
