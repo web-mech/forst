@@ -47,6 +47,10 @@ function lookupReduce(map) {
     }, {});
 }
 
+/**
+ * forst
+ * @param {(string|string[])} path - Config path
+ */
 module.exports =  function(path) {
   if (Array.isArray(path)) {
     return lookupReduce( path );
