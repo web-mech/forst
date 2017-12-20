@@ -1,4 +1,4 @@
-# [![forst](media/logo-01.png)]
+# ![forst](media/logo-01.png))
 
 > Radix Trie-Based Configuration Platform
 
