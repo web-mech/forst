@@ -26,9 +26,16 @@ Create or copy `.env.example` to `.env` and set the `base_path` variable to your
 
 Consider the following config tree directory
 
--   config
-    		\- test : { "enabled": true, "name": "foo" }
-    			\- foo : { "enabled": false }
+```
+/conf/
+├── foo
+│   └── bar
+│       └── baz.json
+├── test
+│   ├── bar.json
+│   └── foo.json -> { "enabled": false }
+└── test.json -> { "enabled": true, "name": "foo" }
+```
 
 #### Getting the base configuration:
 
