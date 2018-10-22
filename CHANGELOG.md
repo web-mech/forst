@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/web-mech/forst/compare/v0.2.1...v1.0.0) (2018-10-22)
+
+
+### Performance Improvements
+
+* pass in basePath at the invocation level rather than depend on an .env file. ([670a9c9](https://github.com/web-mech/forst/commit/670a9c9))
+
+
+### BREAKING CHANGES
+
+* Removed need to have .env file, instead base path is  passed into each call
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/web-mech/forst/compare/v0.2.0...v0.2.1) (2017-12-21)
 
