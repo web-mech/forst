@@ -33,7 +33,7 @@ Consider the following config tree directory
 
     const forst = require('forst');
 
-    const config = await forst('test', './conf');
+    forst('test', './conf').then(config => console.log(config));
 
     console.log(config); // { "enabled": true, "name": "foo" }
 
@@ -41,7 +41,7 @@ Consider the following config tree directory
 
     const forst = require('forst');
 
-    const config = await forst(['test', 'test/foo'], './conf');
+    forst(['test', 'test/foo'], './conf').then(config => console.log(config));
 
     console.log(config); // { "enabled": false,  "name": "foo" }
 
