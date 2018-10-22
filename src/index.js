@@ -1,48 +1,32 @@
 const fs = require('fs');
-const ini = require('ini');
 const {format} = require('util');
 const {join} = require('path');
-const cwd = process.cwd();
 const extend = require('n-deep-merge');
-let __config__;
 
-try {
-  __config__ = ini.parse(fs.readFileSync(join(cwd, '.env'), 'utf-8'));  
-} catch(e) {
-  throw new Error('No .env file found. Please create one and specify a base_path.');
+function _path(path, basePath) {
+  return format('%s.json', join(basePath, path));
 }
 
-if (!__config__.base_path) {
-  throw new Error('No base_path found in .env file. Please specify a base_path.');
-}
-
-if (!fs.existsSync(__config__.base_path)) {
-  throw new Error('base_path points to nowhere. Please check your .env file.');
-}
-
-function _path(path) {
-  return format('%s.json', join(__config__.base_path, path));
-}
-
-function lookupByPath(path) {
-  if (fs.existsSync(_path(path)) && fs.statSync(_path(path)).isFile()) {
-    return JSON.parse(fs.readFileSync(_path(path)));
+function lookupByPath(path, basePath) {
+  let fullPath = _path(path, basePath);
+  if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+    return JSON.parse(fs.readFileSync(fullPath));
   }
 
   if (path.split('/').length > 1) {
     path = path.split('/');
     path.pop();
     path = path.join('/');
-    return lookupByPath(path);
+    return lookupByPath(path, basePath);
   }
 
   return {};
 }
 
-function lookupReduce(map) {
+function lookupReduce(map, basePath) {
   return map
     .reduce(function(config, path) {
-      extend(config, lookupByPath(path));
+      extend(config, lookupByPath(path, basePath));
       return config;
     }, {});
 }
@@ -50,13 +34,20 @@ function lookupReduce(map) {
 /**
  * forst
  * @param {(string|string[])} path - Config path
+ * @param string basePath - Tree base path
  */
-module.exports =  function(path) {
+module.exports =  function(path, basePath) {
+  if (!fs.existsSync(basePath)) {
+    throw new Error(format('Base path %s points to nowhere', basePath));
+  }
+
   if (Array.isArray(path)) {
-    return lookupReduce( path );
+    return lookupReduce( path, basePath );
   }
+
   if (typeof path === 'string') {
-    return lookupByPath( path );
+    return lookupByPath( path, basePath );
   }
+
   return {};
 };

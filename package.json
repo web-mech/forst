@@ -34,7 +34,6 @@
     }
   },
   "dependencies": {
-    "ini": "^1.3.5",
     "n-deep-merge": "0.0.2"
   }
 }
