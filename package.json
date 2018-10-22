@@ -1,6 +1,6 @@
 {
   "name": "forst",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Radix Trie-Based Configuration Platform",
   "main": "src/index.js",
   "scripts": {
