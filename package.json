@@ -36,5 +36,8 @@
   },
   "dependencies": {
     "n-deep-merge": "0.0.2"
+  },
+  "engines" : { 
+    "node" : ">=8.0.0" 
   }
 }
