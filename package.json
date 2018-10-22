@@ -1,12 +1,12 @@
 {
   "name": "forst",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Radix Trie-Based Configuration Platform",
   "main": "src/index.js",
   "scripts": {
     "test": "ava tests/**/**.spec.js",
     "docs": "./node_modules/.bin/documentation readme --section API ./src/*.js",
-    "publish": "git push --follow-tags; npm publish"
+    "publish": "standard-version; git push --follow-tags; npm publish"
   },
   "repository": {
     "type": "git",
