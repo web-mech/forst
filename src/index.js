@@ -1,34 +1,52 @@
 const fs = require('fs');
-const {format} = require('util');
+const {format, promisify} = require('util');
 const {join} = require('path');
 const extend = require('n-deep-merge');
+const fsExists = promisify(fs.exists);
+const fsReadFile = promisify(fs.readFile);
+const fsStat = async function(path) {
+  return new Promise((resolve, reject) => {
+    fs.stat(path, (err, stats) => {
+      resolve(stats);
+    })
+  })
+};
 
 function _path(path, basePath) {
   return format('%s.json', join(basePath, path));
 }
 
-function lookupByPath(path, basePath) {
+async function lookupByPath(path, basePath) {
   let fullPath = _path(path, basePath);
-  if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
-    return JSON.parse(fs.readFileSync(fullPath));
+  let exists = await fsExists(fullPath);
+  let stat = await fsStat(fullPath);
+  let isFile = stat && stat.isFile();
+
+  if (exists && isFile) {
+    let file = await fsReadFile(fullPath);
+    return JSON.parse(file);
   }
 
   if (path.split('/').length > 1) {
-    path = path.split('/');
-    path.pop();
-    path = path.join('/');
+    path = path.substring(0, path.lastIndexOf('/'));
     return lookupByPath(path, basePath);
   }
-
   return {};
 }
 
-function lookupReduce(map, basePath) {
-  return map
-    .reduce(function(config, path) {
-      extend(config, lookupByPath(path, basePath));
-      return config;
-    }, {});
+async function lookupReduce(map, basePath, config = {}) {
+  let path = map.shift();
+
+  if (path) {
+    let nextConfig = await lookupByPath(path, basePath);
+    extend(config, nextConfig);
+  }
+
+  if (map.length) {
+    return lookupReduce(map, basePath, config);
+  } else {
+    return config;
+  }
 }
 
 /**
@@ -36,13 +54,15 @@ function lookupReduce(map, basePath) {
  * @param {(string|string[])} path - Config path
  * @param {string} basePath - Tree base path
  */
-module.exports =  function(path, basePath) {
-  if (!fs.existsSync(basePath)) {
+module.exports = async function forst(path, basePath) {
+  let exists = await fsExists(basePath);
+
+  if (!exists) {
     throw new Error(format('Base path %s points to nowhere', basePath));
   }
 
   if (Array.isArray(path)) {
-    return lookupReduce( path, basePath );
+    return lookupReduce(path, basePath);
   }
 
   if (typeof path === 'string') {

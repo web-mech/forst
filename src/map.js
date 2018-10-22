@@ -5,11 +5,14 @@ const forst = require('.');
  * @param {object} map - Config path map
  * @param {string} basePath - Tree base path
  */
-module.exports = function(map, basePath) {
-  return Object
-  .keys(map)
-  .reduce((configMap, key) => {
-    configMap[key] = forst(map[key], basePath);
-    return configMap;
-  }, {});
+async function forstMap(map, basePath, configMap = {}) {
+  let key = Object.keys(map).shift();
+  configMap[key] = await forst(map[key], basePath);
+  delete map[key];
+  if (Object.keys(map).length) {
+    return forstMap(map, basePath, configMap);
+  }
+  return configMap;
 };
+
+module.exports = forstMap;
