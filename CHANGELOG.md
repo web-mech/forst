@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/web-mech/forst/compare/v1.0.7...v2.0.0) (2018-10-22)
+
+
+### Performance Improvements
+
+* make all file operations async/non-blocking ([b569e40](https://github.com/web-mech/forst/commit/b569e40))
+
+
+### BREAKING CHANGES
+
+* all lookups are now async
+
+
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://github.com/web-mech/forst/compare/v1.0.6...v1.0.7) (2018-10-22)
 
