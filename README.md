@@ -16,32 +16,24 @@ Create a folder in which your config tree(s) will live
 
     $ mkdir config
 
-Create or copy `.env.example` to `.env` and set the `base_path` variable to your config tree directory
-
-#### Example
-
-    base_path=./config
-
 ## Usage
 
 Consider the following config tree directory
 
-```
-/conf/
-├── foo
-│   └── bar
-│       └── baz.json
-├── test
-│   ├── bar.json
-│   └── foo.json -> { "enabled": false }
-└── test.json -> { "enabled": true, "name": "foo" }
-```
+    /conf/
+    ├── foo
+    │   └── bar
+    │       └── baz.json
+    ├── test
+    │   ├── bar.json
+    │   └── foo.json -> { "enabled": false }
+    └── test.json -> { "enabled": true, "name": "foo" }
 
 #### Getting the base configuration:
 
     const forst = require('forst');
 
-    const config = forst('test');
+    const config = forst('test', './config');
 
     console.log(config); // { "enabled": true, "name": "foo" }
 
@@ -49,7 +41,7 @@ Consider the following config tree directory
 
     const forst = require('forst');
 
-    const config = forst(['test', 'test/foo']);
+    const config = forst(['test', 'test/foo'], './config');
 
     console.log(config); // { "enabled": false,  "name": "foo" }
 
@@ -71,6 +63,7 @@ forst
 **Parameters**
 
 -   `path` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>)** Config path
+-   `basePath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Tree base path
 
 #### map
 
@@ -79,3 +72,4 @@ forstMap
 **Parameters**
 
 -   `map` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Config path map
+-   `basePath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Tree base path

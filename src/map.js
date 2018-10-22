@@ -3,6 +3,7 @@ const forst = require('.');
 /**
  * forstMap
  * @param {object} map - Config path map
+ * @param {string} basePath - Tree base path
  */
 module.exports = function(map, basePath) {
   return Object

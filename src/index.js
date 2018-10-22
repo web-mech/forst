@@ -34,7 +34,7 @@ function lookupReduce(map, basePath) {
 /**
  * forst
  * @param {(string|string[])} path - Config path
- * @param string basePath - Tree base path
+ * @param {string} basePath - Tree base path
  */
 module.exports =  function(path, basePath) {
   if (!fs.existsSync(basePath)) {
