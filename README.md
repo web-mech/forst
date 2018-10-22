@@ -14,7 +14,7 @@ Create a folder in which your config tree(s) will live
 
 #### Example
 
-    $ mkdir config
+    $ mkdir conf
 
 ## Usage
 

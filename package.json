@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "ava tests/**/**.spec.js",
-    "docs": "./node_modules/.bin/documentation readme --section API ./src/*.js"
+    "docs": "./node_modules/.bin/documentation readme --section API ./src/*.js",
+    "publish": "git push --follow-tags; npm publish"
   },
   "repository": {
     "type": "git",
