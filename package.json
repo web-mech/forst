@@ -6,7 +6,7 @@
   "scripts": {
     "test": "ava tests/**/**.spec.js",
     "docs": "./node_modules/.bin/documentation readme --section API ./src/*.js",
-    "publish": "standard-version; git push --follow-tags; npm publish"
+    "release": "standard-version; git push --follow-tags; npm publish"
   },
   "repository": {
     "type": "git",
