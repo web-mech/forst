@@ -86,7 +86,7 @@ forstMap
     <img width="200" height="200" src="media/mindfulware.jpg">
   </a>
   <p>
-    Minfulware: Integrity, Performance, Design
+    Mindfulware: Integrity, Performance, Design
   </p>
 </div>
 
