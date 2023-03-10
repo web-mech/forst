@@ -82,7 +82,7 @@ forstMap
   <p>
     The ideas and initial development of this project (formerly known as mwconf) has been sponsored by Mindfulware, a Software Development Company.
   </p>
-  <a href="https://github.com/webpack/webpack">
+  <a href="https://mindfulware.com" target="_blank">
     <img width="200" height="200" src="media/mindfulware.jpg">
   </a>
   <p>
