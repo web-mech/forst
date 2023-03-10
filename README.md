@@ -1,4 +1,6 @@
-# ![forst](media/logo-01.png)
+<div align="center">
+    # ![forst](media/logo-01.png)
+</div>
 
 > Radix Trie Hierarchical Configurations
 
@@ -73,3 +75,20 @@ forstMap
 
 -   `map` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Config path map
 -   `basePath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Tree base path
+
+
+<div align="center">
+  <h2>Sponsors</h2>
+  <p>
+    The ideas and initial development of this project (formerly known as mwconf) has been sponsored by Mindfulware, a Software Development Company.
+  </p>
+  <a href="https://mindfulware.com" target="_blank">
+    <img width="200" height="200" src="media/mindfulware.jpg">
+  </a>
+  <p>
+    Mindfulware: Integrity, Performance, Design
+  </p>
+</div>
+
+
+
