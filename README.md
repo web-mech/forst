@@ -76,6 +76,46 @@ forstMap
 -   `map` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** Config path map
 -   `basePath` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Tree base path
 
+#### Diagram
+
+```mermaid
+graph TD
+subgraph Filesystem as Radix Trie
+A[conf/] --> B[test.json {enabled:true, name:"foo"}]
+A --> C[test/]
+C --> D[test/foo.json {enabled:false}]
+C --> E[test/bar.json {foo:"baz"}]
+A --> F[foo/]
+F --> G[foo/bar/baz.json {hello:"world"}]
+end
+
+subgraph Recursive Fallback
+    D -. fallback to .-> B
+    E -. fallback to .-> B
+    G -. fallback to .-> F
+end
+
+subgraph Merge Resolution
+    H[lookupReduce()] --> I[forst('test') => {enabled:true, name:"foo"}]
+    I --> J[forst('test/foo') => {enabled:false}]
+    J --> K[n-deep-merge => {enabled:false, name:"foo"}]
+end
+
+subgraph Map Expansion
+    L[forstMap()] --> M[foo -> forst('test')]
+    L --> N[superFoo -> forst(['test','test/bar'])]
+    L --> O[amazingFoo -> forst(['test','test/bar','foo/bar/baz'])]
+end
+
+classDef fallback fill:#ffe3b3,stroke:#ffad33,stroke-width:2px;
+classDef merge fill:#d2f8d2,stroke:#6c6,stroke-width:2px;
+classDef trie fill:#d0e6ff,stroke:#4a90e2,stroke-width:2px;
+
+class B,C,D,E,F,G trie;
+class D,E,G fallback;
+class H,I,J,K merge;
+```
+
 
 <div align="center">
   <h2>Sponsors</h2>
@@ -89,6 +129,3 @@ forstMap
     Mindfulware: Integrity, Performance, Design
   </p>
 </div>
-
-
-
