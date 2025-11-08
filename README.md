@@ -81,12 +81,12 @@ forstMap
 ```mermaid
 flowchart TD
 subgraph Filesystem as Radix Trie
-A[conf/] --> B[test.json {enabled:true, name:"foo"}]
+A[conf/] --> B["test.json {enabled:true, name:'foo'}"]
 A --> C[test/]
-C --> D[test/foo.json {enabled:false}]
-C --> E[test/bar.json {foo:"baz"}]
+C --> D["test/foo.json {enabled:false}"]
+C --> E["test/bar.json {foo:'baz'}"]
 A --> F[foo/]
-F --> G[foo/bar/baz.json {hello:"world"}]
+F --> G["foo/bar/baz.json {hello:'world'}"]
 end
 
 subgraph Recursive Fallback
@@ -96,15 +96,15 @@ subgraph Recursive Fallback
 end
 
 subgraph Merge Resolution
-    H[lookupReduce()] --> I[forst('test') => {enabled:true, name:"foo"}]
-    I --> J[forst('test/foo') => {enabled:false}]
-    J --> K[n-deep-merge => {enabled:false, name:"foo"}]
+    H["lookupReduce()"] --> I["forst('test') => {enabled:true, name:'foo'}"]
+    I --> J["forst('test/foo') => {enabled:false}"]
+    J --> K["n-deep-merge => {enabled:false, name:'foo'}"]
 end
 
 subgraph Map Expansion
-    L[forstMap()] --> M[foo -> forst('test')]
-    L --> N[superFoo -> forst(['test','test/bar'])]
-    L --> O[amazingFoo -> forst(['test','test/bar','foo/bar/baz'])]
+    L["forstMap()"] --> M["foo -> forst('test')"]
+    L --> N["superFoo -> forst(['test','test/bar'])"]
+    L --> O["amazingFoo -> forst(['test','test/bar','foo/bar/baz'])"]
 end
 
 classDef fallback fill:#ffe3b3,stroke:#ffad33,stroke-width:2px;
