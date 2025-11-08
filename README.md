@@ -79,7 +79,7 @@ forstMap
 #### Diagram
 
 ```mermaid
-graph TD
+flowchart TD
 subgraph Filesystem as Radix Trie
 A[conf/] --> B[test.json {enabled:true, name:"foo"}]
 A --> C[test/]
@@ -90,9 +90,9 @@ F --> G[foo/bar/baz.json {hello:"world"}]
 end
 
 subgraph Recursive Fallback
-    D -. fallback to .-> B
-    E -. fallback to .-> B
-    G -. fallback to .-> F
+    D -.->|fallback to| B
+    E -.->|fallback to| B
+    G -.->|fallback to| F
 end
 
 subgraph Merge Resolution
